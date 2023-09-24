@@ -12,5 +12,9 @@ export const drupal = new DrupalClient(
   baseUrl,
   {
     previewSecret: process.env.DRUPAL_PREVIEW_SECRET,
+    auth: {
+      clientId: process.env.DRUPAL_CLIENT_ID || '',
+      clientSecret: process.env.DRUPAL_CLIENT_SECRET || '',
+    },
   }
 )
