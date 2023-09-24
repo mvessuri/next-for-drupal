@@ -46,7 +46,7 @@ export async function getStaticProps(
     }
   }
 
-  const type = path.jsonapi.resourceName
+  const type = path.jsonapi?.resourceName
 
   let params = {}
   if (type === "node--article") {
@@ -68,7 +68,7 @@ export async function getStaticProps(
   // We throw an error to tell revalidation to skip this for now.
   // Revalidation can try again on next request.
   if (!resource) {
-    throw new Error(`Failed to fetch resource: ${path.jsonapi.individual}`)
+    throw new Error(`Failed to fetch resource: ${path.jsonapi?.individual}`)
   }
 
   // If we're not in preview mode and the resource is not published,
