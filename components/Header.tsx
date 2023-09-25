@@ -14,6 +14,11 @@ const Header = () => {
             </Link>
           </li>
           <li>
+            <Link href="/notes">
+              Notes
+            </Link>
+          </li>
+          <li>
             <Link href="/test">
               App Router
             </Link>
