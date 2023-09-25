@@ -10,11 +10,9 @@ interface ProductTeaserProps {
 
 export function ProductTeaser({ node, ...props }: ProductTeaserProps) {
   return (
-    <article {...props}>
-      <Link href={node.path.alias} className="no-underline hover:text-blue-600">
-        <h2 className="mb-4 text-4xl font-bold">{node.title}</h2>
+    <article {...props} className="flex items-center mb-5">
       {node.field_product_image && (
-        <figure className="my-4">
+        <figure className="w-32 h-22 mr-4 object-cover rounded-lg shadow-md">
           <Image
             src={absoluteUrl(node.field_product_image.field_media_image.uri.url)}
             width={150}
@@ -23,7 +21,11 @@ export function ProductTeaser({ node, ...props }: ProductTeaserProps) {
           />
         </figure>
       )}
-      </Link>
+      <div>
+        <Link href={node.path.alias} className="no-underline hover:text-blue-600">
+          <h2 className="mb-4 text-4xl font-bold">{node.title}</h2>
+        </Link>
+      </div>
     </article>
   )
 }

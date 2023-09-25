@@ -4,29 +4,28 @@ import { DrupalNode } from "next-drupal"
 
 import { drupal } from "lib/drupal"
 import { Layout } from "components/layout"
-import { ProductTeaser } from "components/product--teaser"
+import { NodeArticleTeaser } from "components/node--article--teaser"
 
-interface ProductsPageProps {
+interface IndexPageProps {
   nodes: DrupalNode[]
 }
 
-export default function ProductsPage({ nodes }: ProductsPageProps) {
+export default function IndexPage({ nodes }: IndexPageProps) {
   return (
     <Layout>
       <Head>
-        <title>Products List</title>
+        <title>Next.js for Drupal</title>
         <meta
           name="description"
           content="A Next.js site powered by a Drupal backend."
         />
       </Head>
       <div>
-        <h1 className="mb-10 text-6xl font-black">Products List</h1>
+        <h1 className="mb-10 text-6xl font-black">Latest Articles.</h1>
         {nodes?.length ? (
           nodes.map((node) => (
             <div key={node.id}>
-              <ProductTeaser node={node} />
-              <hr className="my-20" />
+              <NodeArticleTeaser node={node} />
             </div>
           ))
         ) : (
@@ -39,16 +38,16 @@ export default function ProductsPage({ nodes }: ProductsPageProps) {
 
 export async function getStaticProps(
   context
-): Promise<GetStaticPropsResult<ProductsPageProps>> {
+): Promise<GetStaticPropsResult<IndexPageProps>> {
   const nodes = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-    "node--products",
+    "node--article",
     context,
     {
       params: {
         "filter[status]": 1,
-        "fields[node--products]": "title,path,field_product_image",
-        include: "field_product_image.field_media_image",
-        sort: "title",
+        "fields[node--article]": "title,path,field_image,uid,created",
+        include: "field_image,uid",
+        sort: "-created",
       },
     }
   )
