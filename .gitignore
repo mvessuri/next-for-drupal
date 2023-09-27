@@ -35,4 +35,7 @@ lerna-debug.log*
 # vercel
 .vercel
 
+# VSCode
+.vscode/*
+
 /certificates/*
